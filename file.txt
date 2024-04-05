@@ -1,0 +1,239 @@
+How Web Works Exercise
+
+Part one: Solidify Terminology
+In your own terms , define the following terms :
+
+    -What is HTTP?
+HTTP is a protocol commonly used to transfer information within a network of devices.
+
+    -What us a URL?
+URLs are used as the address for a web page and contain information about the current page
+
+    -What is a DNS?
+A DNS translates computer generated IP addresses from human readable domain names
+
+    -What is a query string?
+The query string is the part of the URL that assigns certain values based on the current page
+
+    -What are two HTTP verbs and how are they different?
+POST and GET , POST is for sending out information and GET is for retrieving information without altering it
+
+    -What is a HTTP request?
+HTTP requests are information requests declared with HTTP for retrieving data
+
+    -What is an HTTP response?
+The HTTP response is the result of the HTTP request , containing an HTTP status code or an error code
+
+    -What is an HTTP header? Give a couple examples of request and response headers you have seen
+An HTTP header provides information on the request or response 
+request headers : Host , User-Agent , Accept
+response headers : Content-type , Cache-Control , Last-Modified
+
+    -What are the processes that happen when you type "https://somesite.com/some/page.html" into 
+    a browser?
+Protocol : https://
+domain : somesite.com
+path : /some/page.html 
+
+DNS lookup , HTTP request , HTTP response , Resource loading / page display
+
+
+
+
+
+
+PART TWO : Practice Tools
+
+1. Using curl , make a GET request to the icanhazdadjoke.com API to find all jokes involving the 
+word "pirate".
+
+    paulo@ThisPC22:~$ curl -s "https://icanhazdadjoke.com/search?term=pirate"
+    What does a pirate pay for his corn? A buccaneer!
+    Why couldn't the kid see the pirate movie? Because it was rated arrr!
+    What did the pirate say on his 80th birthday? Aye Matey!
+    Why are pirates called pirates? Because they arrr!
+    Why do pirates not know the alphabet? They always get stuck at "C".paulo@ThisPC22:~$
+
+2. Use dig to find what the IP address is for icanhazdadjoke.com
+
+    paulo@ThisPC22:~$ dig icanhazdadjoke.com
+
+    ; <<>> DiG 9.18.18-0ubuntu0.22.04.1-Ubuntu <<>> icanhazdadjoke.com
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60268
+    ;; flags: qr rd ad; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+    ;; WARNING: recursion requested but not available
+
+    ;; QUESTION SECTION:
+    ;icanhazdadjoke.com.            IN      A
+
+    ;; ANSWER SECTION:
+    icanhazdadjoke.com.     0       IN      A       172.67.198.173
+    icanhazdadjoke.com.     0       IN      A       104.21.66.15
+
+    ;; Query time: 10 msec
+    ;; SERVER: 172.28.208.1#53(172.28.208.1) (UDP)
+    ;; WHEN: Thu Apr 04 22:39:50 PDT 2024
+    ;; MSG SIZE  rcvd: 86
+
+    paulo@ThisPC22:~$
+
+
+
+3. Make a simple web page and serve it using python3-m http.server. Visit the page in a browser.
+
+
+
+
+
+PART THREE : Explore Dev Tools
+
+Build a very simple html form that uses the get method (it can use the same page URL for the action)
+when the form is submitted. 
+
+(index.html)
+
+
+
+
+Add a field or two to the form and, after submitting it , explore in chrome dev tools how you can 
+view the request and response headers.
+
+            Accept-Ranges:
+            bytes
+            Access-Control-Allow-Credentials:
+            true
+            Cache-Control:
+            public, max-age=0
+            Connection:
+            keep-alive
+            Content-Length:
+            2024
+            Content-Type:
+            text/html; charset=UTF-8
+            Date:
+            Fri, 05 Apr 2024 05:56:55 GMT
+            Etag:
+            W/"213-18eacd49e30"
+            Keep-Alive:
+            timeout=5
+            Last-Modified:
+            Fri, 05 Apr 2024 05:56:39 GMT
+            Vary:
+            Origin
+            Accept:
+            text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            Accept-Encoding:
+            gzip, deflate, br, zstd
+            Accept-Language:
+            en-US,en;q=0.9
+            Connection:
+            keep-alive
+            Host:
+            localhost:5500
+            Referer:
+            http://localhost:5500/
+            Sec-Ch-Ua:
+            "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+            Sec-Ch-Ua-Mobile:
+            ?0
+            Sec-Ch-Ua-Platform:
+            "Windows"
+            Sec-Fetch-Dest:
+            document
+            Sec-Fetch-Mode:
+            navigate
+            Sec-Fetch-Site:
+            same-origin
+            Sec-Fetch-User:
+            ?1
+            Upgrade-Insecure-Requests:
+            1
+            User-Agent:
+            Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+
+
+
+
+
+Edit the page to change the form type to POST , refresh the browser and re-submit. Do you still
+see the field in the query string? Explore in chrome how you can view the request and response 
+headers , as well as the form data.
+
+            Accept-Ranges:
+            bytes
+            Access-Control-Allow-Credentials:
+            true
+            Cache-Control:
+            public, max-age=0
+            Connection:
+            keep-alive
+            Date:
+            Fri, 05 Apr 2024 06:04:13 GMT
+            Etag:
+            W/"213-18eacd49e30"
+            Keep-Alive:
+            timeout=5
+            Last-Modified:
+            Fri, 05 Apr 2024 05:56:39 GMT
+            Vary:
+            Origin
+            Accept:
+            text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            Accept-Encoding:
+            gzip, deflate, br, zstd
+            Accept-Language:
+            en-US,en;q=0.9
+            Connection:
+            keep-alive
+            Host:
+            localhost:5500
+            If-Modified-Since:
+            Fri, 05 Apr 2024 05:56:39 GMT
+            If-None-Match:
+            W/"213-18eacd49e30"
+            Referer:
+            http://localhost:5500/?name=Paulo+Carrera&email=Paulo3252%40myyahoo.com
+            Sec-Ch-Ua:
+            "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+            Sec-Ch-Ua-Mobile:
+            ?0
+            Sec-Ch-Ua-Platform:
+            "Windows"
+            Sec-Fetch-Dest:
+            document
+            Sec-Fetch-Mode:
+            navigate
+            Sec-Fetch-Site:
+            same-origin
+            Sec-Fetch-User:
+            ?1
+            Upgrade-Insecure-Requests:
+            1
+            User-Agent:
+            Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+
+
+
+
+
+
+
+
+
+PART FOUR : Explore the URL API 
+
+At times it's useful for your JavaScript to look at the URL of the browser window and change
+how the script works depending on parts of that (particularly the query string).
+Try some of the code examples in the chrome console so that you can get comfortable with the basic
+methods and properties for instances of the URL class. 
+
+
+
+
+
+
+
+
+
